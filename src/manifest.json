@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "My Chrome Extension",
+  "version": "1.0.2",
+  "description": "Awesome Description",
+
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+
+  "browser_action": {
+    "default_icon": "assets/icons/icon1000.png",
+    "default_popup": "popup.html"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["lib/jquery.min.js"],
+    "run_at": "document_end"
+  }],
+
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "storage"
+  ],
+
+  "web_accessible_resources": [
+    "assets/*",
+  ]
+}
