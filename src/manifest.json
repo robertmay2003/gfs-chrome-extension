@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "GFS Chrome Extension",
   "version": "1.0.2",
-  "description": "Awesome Description!",
+  "description": "Awesome Description! ",
 
   "icons": {
     "16": "assets/icons/icon16.png",
