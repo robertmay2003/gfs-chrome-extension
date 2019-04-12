@@ -3,7 +3,6 @@
   "name": "GFS Chrome Extension",
   "version": "1.0.2",
   "description": "Awesome Description! ",
-
   "icons": {
     "16": "assets/icons/icon16.png",
     "48": "assets/icons/icon48.png",
