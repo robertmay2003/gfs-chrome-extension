@@ -1,6 +1,6 @@
 // Background stuff here
 function updateTabData(data, callback = ()=>{}) {
-	console.log('New data:', data);
+	// DEV: - console.log('New data:', data);
 	chrome.storage.local.set({tabData: data}, callback());
 }
 
@@ -72,11 +72,11 @@ function updateAllTabData(callback) {
 }
 
 function onTabUpdate(tabId , info) {
-	console.log(`At: ${new Date().getTime()}`);
+	// DEV: - console.log(`At: ${new Date().getTime()}`);
 	if (info.status === 'complete') {
 		getTabData( function(result) {
 			let tabData = result.tabData;
-			console.log(`${tabData.lastActiveTab} -> ${tabId}`);
+			// DEV: - console.log(`${tabData.lastActiveTab} -> ${tabId}`);
 
 			/* Manipulate here */
 
@@ -96,7 +96,7 @@ function onTabUpdate(tabId , info) {
 				tabData.tabs[tabId].active = true;
 			}
 
-			console.log(tabData);
+			// DEV: - console.log(tabData);
 			tabData.lastActiveTab = tabId;
 			/* Once manipulation finished */
 			updateTabData(tabData);
@@ -112,7 +112,7 @@ chrome.runtime.onInstalled.addListener(function() {
 	updateTabData({tabs: {}});
 	registerAllTabs();
 
-	console.log('Installed Successfully');
+	// DEV: - console.log('Installed Successfully');
 });
 
 chrome.tabs.onCreated.addListener(function(tab) {
