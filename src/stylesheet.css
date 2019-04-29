@@ -1,16 +1,15 @@
 div#gfsInformationDiv {
-  display: block;
   position: fixed;
   top:0;
   left:0;
-  width:100%;
+  width: 100%;
+  height: 300px;
   transition: 0.25s;
-  border:1px solid #000000;
+  z-index: 1;
 }
 div#gfsInformationDiv:hover {
-  display: block;
-  color: black;
-  height: 50px;
+  background: blue;
+  color: white;
+  height: 400px;
   transition: 0.25s;
-
 }
