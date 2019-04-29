@@ -68,6 +68,7 @@ function updateAllTabData(callback) {
 
 		/* Once manipulation finished */
 		updateTabData(tabData);
+		callback()
 	})
 }
 
@@ -112,6 +113,8 @@ chrome.runtime.onInstalled.addListener(function() {
 	updateTabData({tabs: {}});
 	registerAllTabs();
 
+	chrome.storage.local.set({blockedSites: []})
+
 	// DEV: - console.log('Installed Successfully');
 });
 
@@ -155,4 +158,12 @@ chrome.tabs.onRemoved.addListener(function(tabId, info) {
 		/* Once manipulation finished */
 		updateTabData(tabData);
 	});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	updateAllTabData(()=>{
+		getTabData((tabData)=>{
+			var data = tabData.tabData.tabs[sender.tab.id];
+			chrome.tabs.sendMessage(sender.tab.id, {purpose: "tabData", data: data});
+		})
+	})
 });
