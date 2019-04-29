@@ -143,21 +143,16 @@ chrome.tabs.onUpdated.addListener(onTabUpdate);
 chrome.tabs.onActivated.addListener(onTabSelect);
 
 chrome.tabs.onRemoved.addListener(function(tabId, info) {
-	if (info.status === 'complete') {
-		getTabData(function(result) {
-			let tabData = result.tabData;
+	console.log(info.status);
+	getTabData(function(result) {
+		let tabData = result.tabData;
 
-			/* Manipulate here */
+		/* Manipulate here */
 
-			// remove from tabData
-			tabData.tabs[tabId] = null;
+		// remove from tabData
+		tabData.tabs[tabId] = null;
 
-			/* Once manipulation finished */
-			updateTabData(tabData);
-		});
-	}
-});
-
-chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
-    chrome.tabs.executeScript(null,{file:"contentscript.js"});
+		/* Once manipulation finished */
+		updateTabData(tabData);
+	});
 });
