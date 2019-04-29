@@ -159,14 +159,11 @@ chrome.tabs.onRemoved.addListener(function(tabId, info) {
 	}
 });
 
-console.log("gruh")
-
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	updateAllTabData(()=>{
 		getTabData((tabData)=>{
-			console.log(tabData.tabData.tabs[sender.tab.id]);
-			sendResponse({data: tabData.tabData.tabs[sender.tab.id]});
+			var data = tabData.tabData.tabs[sender.tab.id];
+			chrome.tabs.sendMessage(sender.tab.id, {purpose: "tabData", data: data});
 		})
-
 	})
 });
