@@ -157,3 +157,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, info) {
 		});
 	}
 });
+
+chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
+    chrome.tabs.executeScript(null,{file:"contentscript.js"});
+});
