@@ -113,6 +113,8 @@ chrome.runtime.onInstalled.addListener(function() {
 	updateTabData({tabs: {}});
 	registerAllTabs();
 
+	chrome.storage.local.set({blockedSites: []})
+
 	// DEV: - console.log('Installed Successfully');
 });
 
