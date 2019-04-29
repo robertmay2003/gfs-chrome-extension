@@ -68,6 +68,7 @@ function updateAllTabData(callback) {
 
 		/* Once manipulation finished */
 		updateTabData(tabData);
+		callback()
 	})
 }
 
@@ -158,6 +159,14 @@ chrome.tabs.onRemoved.addListener(function(tabId, info) {
 	}
 });
 
-chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
-    chrome.tabs.executeScript(null,{file:"contentscript.js"});
+console.log("gruh")
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	updateAllTabData(()=>{
+		getTabData((tabData)=>{
+			console.log(tabData.tabData.tabs[sender.tab.id]);
+			sendResponse({data: tabData.tabData.tabs[sender.tab.id]});
+		})
+
+	})
 });
