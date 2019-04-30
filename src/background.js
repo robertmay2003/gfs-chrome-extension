@@ -146,8 +146,7 @@ chrome.tabs.onUpdated.addListener(onTabUpdate);
 chrome.tabs.onActivated.addListener(onTabSelect);
 
 chrome.tabs.onRemoved.addListener(function(tabId, info) {
-	console.log(info.status);
-	getTabData(function(result) {
+	getTabData(function (result) {
 		let tabData = result.tabData;
 
 		/* Manipulate here */
@@ -158,6 +157,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, info) {
 		/* Once manipulation finished */
 		updateTabData(tabData);
 	});
+}
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	updateAllTabData(()=>{
