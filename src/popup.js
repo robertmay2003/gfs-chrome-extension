@@ -1,24 +1,27 @@
 // JS to run in your popup
 function urlDomain(url) {
+  console.log('url: ' + url);
   let a = document.createElement('a');
   a.href = url;
   return a.hostname;
 }
 
 function loadData(sites) {
-  let siteList = $('#siteList')
+  let siteList = $('#siteList');
   siteList.empty();
 
   for (let i = 0; i < sites.length; i++) {
     let li = $('<li/>')
       .addClass('blockedSiteLi')
-      .html(sites[i])
-      .appendTo(siteList)
+      .text(sites[i])
+      .appendTo(siteList);
+
+    console.log(sites[i]);
   }
 }
 
-function blockTab(){
-  let input = document.getElementById('inputButton');
+function blockSite(){
+  let input = document.getElementById('inputWebsite');
   let val = urlDomain(input.value);
 
   chrome.storage.local.get(['blockedSites'], (result)=>{
@@ -33,7 +36,9 @@ function blockTab(){
 
 window.requestAnimationFrame(()=>{
   chrome.storage.local.get(['blockedSites'], (result)=>{
-    loadData(result.blockedSites);
-  })
-})
+    loadData(result.blockedSites || []);
+  });
+
+  $('#inputButton').click(blockSite);
+});
 

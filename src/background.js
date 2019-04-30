@@ -88,6 +88,11 @@ function onTabUpdate(tabId , info) {
 			if (tabData.lastActiveTab !== tabId) {
 				let tab = tabData.tabs[tabId];
 
+				if (!tab) {
+					console.log(tabData, tabId);
+					return;
+				}
+
 				tab.timeInactive += (new Date().getTime() - tab.lastTimeCalculation);
 				tab.timeOpen = (new Date().getTime() - tab.created);
 				tab.timeActive = (tab.timeOpen - tab.timeInactive);
@@ -157,7 +162,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, info) {
 		/* Once manipulation finished */
 		updateTabData(tabData);
 	});
-}
+});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	updateAllTabData(()=>{
