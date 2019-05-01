@@ -1,11 +1,11 @@
 // Background stuff here
 function updateTabData(data, callback = ()=>{}) {
 	// DEV: - console.log('New data:', data);
-	chrome.storage.local.set({tabData: data}, callback());
+	chrome.storage.local.set({gfsTabData: data}, callback());
 }
 
 function getTabData(callback) {
-	chrome.storage.local.get(['tabData'], (result)=>{callback(result)});
+	chrome.storage.local.get(['gfsTabData'], (result)=>{callback(result)});
 }
 
 function recordLastActiveTab(tabData) {
@@ -24,11 +24,11 @@ function recordLastActiveTab(tabData) {
 function registerAllTabs() {
 	chrome.tabs.query({}, (tabs) => {
 		getTabData(function (result) {
-			let tabData = result.tabData;
+			let tabData = result.gfsTabData;
 			for (let i = 0; i < tabs.length; i++) {
 				let tab = tabs[i];
 
-				let tabData = result.tabData;
+				let tabData = result.gfsTabData;
 
 				/* Manipulate here */
 				tabData.tabs[tab.id] = {
@@ -51,7 +51,7 @@ function registerAllTabs() {
 
 function updateAllTabData(callback) {
 	getTabData( function (result) {
-		let tabData = result.tabData;
+		let tabData = result.gfsTabData;
 
 		/* Manipulate here */
 
@@ -76,7 +76,7 @@ function onTabUpdate(tabId , info) {
 	// DEV: - console.log(`At: ${new Date().getTime()}`);
 	if (info.status === 'complete') {
 		getTabData( function(result) {
-			let tabData = result.tabData;
+			let tabData = result.gfsTabData;
 			// DEV: - console.log(`${tabData.lastActiveTab} -> ${tabId}`);
 
 			/* Manipulate here */
@@ -118,14 +118,14 @@ chrome.runtime.onInstalled.addListener(function() {
 	updateTabData({tabs: {}});
 	registerAllTabs();
 
-	chrome.storage.local.set({blockedSites: []})
+	chrome.storage.local.set({gfsBlockedSites: []})
 
 	// DEV: - console.log('Installed Successfully');
 });
 
 chrome.tabs.onCreated.addListener(function(tab) {
 	getTabData( function (result) {
-		let tabData = result.tabData;
+		let tabData = result.gfsTabData;
 
 		/* Manipulate here */
 		// Record last active tab
@@ -152,7 +152,7 @@ chrome.tabs.onActivated.addListener(onTabSelect);
 
 chrome.tabs.onRemoved.addListener(function(tabId, info) {
 	getTabData(function (result) {
-		let tabData = result.tabData;
+		let tabData = result.gfsTabData;
 
 		/* Manipulate here */
 
@@ -166,8 +166,8 @@ chrome.tabs.onRemoved.addListener(function(tabId, info) {
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	updateAllTabData(()=>{
-		getTabData((tabData)=>{
-			var data = tabData.tabData.tabs[sender.tab.id];
+		getTabData((result)=>{
+			var data = result.gfsTabData.tabs[sender.tab.id];
 			chrome.tabs.sendMessage(sender.tab.id, {purpose: "tabData", data: data});
 		})
 	})

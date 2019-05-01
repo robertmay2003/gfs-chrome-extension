@@ -24,19 +24,19 @@ function blockSite(){
   let input = document.getElementById('inputWebsite');
   let val = urlDomain(input.value);
 
-  chrome.storage.local.get(['blockedSites'], (result)=>{
-    let blockedSites = result.blockedSites || [];
+  chrome.storage.local.get(['gfsBlockedSites'], (result)=>{
+    let blockedSites = result.gfsBlockedSites || [];
     blockedSites.push(val);
 
     loadData(blockedSites);
 
-    chrome.storage.local.set({blockedSites: blockedSites})
+    chrome.storage.local.set({gfsBlockedSites: blockedSites})
   })
 }
 
 window.requestAnimationFrame(()=>{
-  chrome.storage.local.get(['blockedSites'], (result)=>{
-    loadData(result.blockedSites || []);
+  chrome.storage.local.get(['gfsBlockedSites'], (result)=>{
+    loadData(result.gfsBlockedSites || []);
   });
 
   $('#inputButton').click(blockSite);
