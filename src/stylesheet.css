@@ -7,6 +7,7 @@ div#gfsInformationDiv {
   transition: 0.25s;
   z-index: 1000000;
 }
+
 div#gfsInformationDiv:hover {
   height: 150px;
   background: #2F66A9;
@@ -14,4 +15,42 @@ div#gfsInformationDiv:hover {
   border-width: 10px;
   border-color: #072C61;
   transition: 0.25s;
+}
+
+ p#gfsTimeActive, p#gfsTimeInactive {
+   margin: auto;
+   text-align: center;
+}
+
+p#gfsTimeActive {
+  margin-top: 5%;
+  margin-left: 10%;
+  float: left;
+}
+
+p#gfsTimeInactive {
+  margin-top: 5%;
+  margin-right: 10%;
+  float: right;
+}
+
+ #gfsActiveBar{
+  margin-top: 5%;
+	height:5px;
+	width:50%;
+	background:#7FFF00;
+	float:left;
+}
+
+ #gfsInactiveBar{
+  margin-top: 5%;
+	height:5px;
+	width:50%;
+	background:#FF4040;
+	float:right;
+}
+
+#gfsTotalBar{
+	margin:0 auto;
+	width:60%;
 }
