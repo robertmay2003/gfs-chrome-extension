@@ -24,8 +24,10 @@ window.requestAnimationFrame(() => {
           window.data = request.data;
         }
       });
-      timeActive.innerHTML = ((window.data.timeActive)/1000).toString() + " secs";
-      timeInactive.innerHTML = ((window.data.timeInactive)/1000).toString() + " secs";
+      if (window.data.timeActive) {
+        timeActive.innerHTML = ((window.data.timeActive)/1000).toString() + " secs";
+        timeInactive.innerHTML = ((window.data.timeInactive)/1000).toString() + " secs";
+      }
 
       // Making the bar
       var time = (window.data.timeActive)/1000 + (window.data.timeInactive)/1000;
