@@ -8,23 +8,6 @@ function getTabData(callback) {
 	chrome.storage.local.get(['gfsTabData'], (result)=>{callback(result)});
 }
 
-<<<<<<< HEAD
-chrome.runtime.onInstalled.addListener(function() {
-	
-});
-let global{
-	count:0,
-}
-chrome.tabs.onUpdated.addListener(function (tabId , info) {
-	if (info.status === 'complete') {
-		global.count = global.count + 1;
-		if (global.count === 2) {
-			let d{
-				date()
-			}
-		}
-
-=======
 function recordLastActiveTab(tabData) {
 	// Record active time for last active tab
 	if (tabData.lastActiveTab) {
@@ -118,7 +101,6 @@ function onTabUpdate(tabId , info) {
 
 				tabData.tabs[tabId].active = true;
 			}
->>>>>>> bef2393e2e2a834506e1b70f765d06a8c81573b4
 
 			// DEV: - console.log(tabData);
 			tabData.lastActiveTab = tabId;
@@ -126,8 +108,6 @@ function onTabUpdate(tabId , info) {
 			updateTabData(tabData);
 		})
 	}
-<<<<<<< HEAD
-=======
 }
 
 function onTabSelect(activeInfo) {
@@ -191,5 +171,4 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			chrome.tabs.sendMessage(sender.tab.id, {purpose: "tabData", data: data});
 		})
 	})
->>>>>>> bef2393e2e2a834506e1b70f765d06a8c81573b4
 });
