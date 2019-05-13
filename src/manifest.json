@@ -20,7 +20,8 @@
 
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
-    "js": ["lib/jquery.min.js"],
+    "js": ["content.js", "lib/jquery.min.js"],
+    "css": ["stylesheet.css"],
     "run_at": "document_end"
   }],
 
