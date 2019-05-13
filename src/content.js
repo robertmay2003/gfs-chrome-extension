@@ -1,3 +1,4 @@
+// Manage tab activity manager on top of screen
 window.requestAnimationFrame(() => {
   var div = document.createElement('div');
   var timeActive = document.createElement('p');
@@ -66,4 +67,16 @@ window.requestAnimationFrame(() => {
   });
 	// Run this code in the actual page
 	// can be run manually by popup.js or automatically on page load through manifest.json
+});
+
+// Manage site blocking
+window.requestAnimationFrame(()=>{
+  let
+
+  function urlDomain(url) {
+    console.log('url: ' + url);
+    let a = document.createElement('a');
+    a.href = url;
+    return a.hostname;
+  }
 });

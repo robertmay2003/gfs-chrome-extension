@@ -143,7 +143,7 @@ chrome.tabs.onCreated.addListener(function(tab) {
 		};
 
 		/* Once manipulation finished */
-		updateTabData(tabData);
+		updateTabData(tabData, {status: 'complete'});
 	})
 });
 
